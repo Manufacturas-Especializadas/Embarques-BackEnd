@@ -1,0 +1,118 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\jose.lugo\\Music\\Embarques - BackEnd\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7EEB5C8E-6E5E-4028-B2E3-82684C1DFF55}|Embarques\\Embarques.csproj|c:\\users\\jose.lugo\\music\\embarques - backend\\embarques\\controllers\\fletescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EEB5C8E-6E5E-4028-B2E3-82684C1DFF55}|Embarques\\Embarques.csproj|solutionrelative:embarques\\controllers\\fletescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EEB5C8E-6E5E-4028-B2E3-82684C1DFF55}|Embarques\\Embarques.csproj|c:\\users\\jose.lugo\\music\\embarques - backend\\embarques\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7EEB5C8E-6E5E-4028-B2E3-82684C1DFF55}|Embarques\\Embarques.csproj|solutionrelative:embarques\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EEB5C8E-6E5E-4028-B2E3-82684C1DFF55}|Embarques\\Embarques.csproj|c:\\users\\jose.lugo\\music\\embarques - backend\\embarques\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EEB5C8E-6E5E-4028-B2E3-82684C1DFF55}|Embarques\\Embarques.csproj|solutionrelative:embarques\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EEB5C8E-6E5E-4028-B2E3-82684C1DFF55}|Embarques\\Embarques.csproj|c:\\users\\jose.lugo\\music\\embarques - backend\\embarques\\controllers\\generallistscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EEB5C8E-6E5E-4028-B2E3-82684C1DFF55}|Embarques\\Embarques.csproj|solutionrelative:embarques\\controllers\\generallistscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EEB5C8E-6E5E-4028-B2E3-82684C1DFF55}|Embarques\\Embarques.csproj|c:\\users\\jose.lugo\\music\\embarques - backend\\embarques\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EEB5C8E-6E5E-4028-B2E3-82684C1DFF55}|Embarques\\Embarques.csproj|solutionrelative:embarques\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EEB5C8E-6E5E-4028-B2E3-82684C1DFF55}|Embarques\\Embarques.csproj|c:\\users\\jose.lugo\\music\\embarques - backend\\embarques\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7EEB5C8E-6E5E-4028-B2E3-82684C1DFF55}|Embarques\\Embarques.csproj|solutionrelative:embarques\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\jose.lugo\\Music\\Embarques - BackEnd\\Embarques\\appsettings.json",
+              "RelativeDocumentMoniker": "Embarques\\appsettings.json",
+              "ToolTip": "C:\\Users\\jose.lugo\\Music\\Embarques - BackEnd\\Embarques\\appsettings.json",
+              "RelativeToolTip": "Embarques\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-19T21:17:12.248Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\jose.lugo\\Music\\Embarques - BackEnd\\Embarques\\Program.cs",
+              "RelativeDocumentMoniker": "Embarques\\Program.cs",
+              "ToolTip": "C:\\Users\\jose.lugo\\Music\\Embarques - BackEnd\\Embarques\\Program.cs",
+              "RelativeToolTip": "Embarques\\Program.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAHIAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-10T16:05:26.982Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FletesController.cs",
+              "DocumentMoniker": "C:\\Users\\jose.lugo\\Music\\Embarques - BackEnd\\Embarques\\Controllers\\FletesController.cs",
+              "RelativeDocumentMoniker": "Embarques\\Controllers\\FletesController.cs",
+              "ToolTip": "C:\\Users\\jose.lugo\\Music\\Embarques - BackEnd\\Embarques\\Controllers\\FletesController.cs",
+              "RelativeToolTip": "Embarques\\Controllers\\FletesController.cs",
+              "ViewState": "AgIAAAQBAAAAAAAAAAAAABsBAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-10T14:38:01.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GeneralListsController.cs",
+              "DocumentMoniker": "C:\\Users\\jose.lugo\\Music\\Embarques - BackEnd\\Embarques\\Controllers\\GeneralListsController.cs",
+              "RelativeDocumentMoniker": "Embarques\\Controllers\\GeneralListsController.cs",
+              "ToolTip": "C:\\Users\\jose.lugo\\Music\\Embarques - BackEnd\\Embarques\\Controllers\\GeneralListsController.cs",
+              "RelativeToolTip": "Embarques\\Controllers\\GeneralListsController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwDMAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-10T18:18:21.648Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\jose.lugo\\Music\\Embarques - BackEnd\\Embarques\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "Embarques\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\jose.lugo\\Music\\Embarques - BackEnd\\Embarques\\Services\\AuthService.cs",
+              "RelativeToolTip": "Embarques\\Services\\AuthService.cs",
+              "ViewState": "AgIAANsAAAAAAAAAAAAcwPYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-10T16:02:50.603Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\jose.lugo\\Music\\Embarques - BackEnd\\Embarques\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Embarques\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\jose.lugo\\Music\\Embarques - BackEnd\\Embarques\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Embarques\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAgwG4AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-10T16:02:41.709Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
