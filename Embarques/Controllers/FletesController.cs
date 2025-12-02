@@ -179,6 +179,148 @@ namespace Embarques.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("GenerateReportByDateRange")]
+        public async Task<IActionResult> GenerateReportByDateRange([FromBody] ReportByDateDto dto)
+        {
+            try
+            {
+                if (dto.StartTime > dto.EndTime)
+                {
+                    return BadRequest(new
+                    {
+                        success = false,
+                        message = "La fecha de inicio no puede ser mayor a la fecha de fin"
+                    });
+                }
+
+                var fletes = await _context.Fletes
+                                .Include(f => f.IdSupplierNavigation)
+                                .Include(f => f.IdDestinationNavigation)
+                                .Where(f => f.RegistrationDate.HasValue &&
+                                            f.RegistrationDate.Value.Date >= dto.StartTime.Date &&
+                                            f.RegistrationDate.Value.Date <= dto.EndTime.Date)
+                                .OrderBy(f => f.RegistrationDate)
+                                .ThenByDescending(f => f.Id)
+                                .AsNoTracking()
+                                .ToListAsync();
+
+                if (!fletes.Any())
+                {
+                    return NotFound(new
+                    {
+                        success = false,
+                        message = "No hay datos para el período especificado"
+                    });
+                }
+
+                using (var workbook = new XLWorkbook())
+                {
+                    var workSheet = workbook.Worksheets.Add("Reporte por período");
+
+                    workSheet.Cell(1, 1).Value = $"REPORTE DE FLETES - DEL {dto.StartTime:dd/MM/yyyy} AL {dto.EndTime:dd/MM/yyyy}";
+                    workSheet.Cell(1, 1).Style.Font.Bold = true;
+                    workSheet.Cell(1, 1).Style.Font.FontSize = 14;
+                    workSheet.Range(1, 1, 1, 9).Merge();
+
+                    var headers = new string[] { "Proveedor", "Semana", "Destino", "Número de viaje", "Costo proveedor", "Gastos autopista", "Gasto estadía", "Costo total", "Fecha" };
+
+                    for (int i = 0; i < headers.Length; i++)
+                    {
+                        workSheet.Cell(3, i + 1).Value = headers[i];
+                        workSheet.Cell(3, i + 1).Style.Font.Bold = true;
+                        workSheet.Cell(3, i + 1).Style.Fill.BackgroundColor = XLColor.LightGray;
+                    }
+
+                    int row = 4;
+                    foreach (var flete in fletes)
+                    {
+                        workSheet.Cell(row, 1).Value = flete.IdSupplierNavigation?.SupplierName ?? "N/A";
+
+                        if (flete.RegistrationDate.HasValue)
+                        {
+                            var date = flete.RegistrationDate.Value;
+                            var firtsMonth = new DateTime(date.Year, date.Month, 1);
+                            var diff = (date - firtsMonth).Days;
+                            var week = (diff / 7) + 1;
+                            var startWeek = firtsMonth.AddDays((week - 1) * 7);
+                            var endWeek = startWeek.AddDays(6);
+
+                            if (endWeek.Month != date.Month)
+                            {
+                                endWeek = new DateTime(date.Year, date.Month, DateTime.DaysInMonth(date.Year, date.Month));
+                            }
+
+                            workSheet.Cell(row, 2).Value = $"{startWeek:dd MMM}.-{endWeek:dd MMM}";
+                        }
+                        else
+                        {
+                            workSheet.Cell(row, 2).Value = "N/A";
+                        }
+
+                        workSheet.Cell(row, 3).Value = flete.IdDestinationNavigation?.DestinationName ?? "N/A";
+                        workSheet.Cell(row, 4).Value = flete.TripNumber ?? 0;
+                        workSheet.Cell(row, 5).Value = flete.IdDestinationNavigation?.Cost ?? 0;
+                        workSheet.Cell(row, 6).Value = flete.HighwayExpenseCost ?? 0;
+                        workSheet.Cell(row, 7).Value = flete.CostOfStay ?? 0;
+
+                        var totalCost = (flete.IdDestinationNavigation?.Cost ?? 0) +
+                                       (flete.HighwayExpenseCost ?? 0) +
+                                       (flete.CostOfStay ?? 0);
+                        workSheet.Cell(row, 8).Value = totalCost;
+
+                        workSheet.Cell(row, 9).Value = flete.RegistrationDate?.ToString("dd/MM/yyyy") ?? "N/A";
+
+                        row++;
+                    }
+
+                    workSheet.Column(5).Style.NumberFormat.Format = "$ #,##0";
+                    workSheet.Column(6).Style.NumberFormat.Format = "$ #,##0";
+                    workSheet.Column(7).Style.NumberFormat.Format = "$ #,##0";
+                    workSheet.Column(8).Style.NumberFormat.Format = "$ #,##0";
+
+                    workSheet.Columns().AdjustToContents();
+
+                    workSheet.Cell(row, 4).Value = "TOTALES:";
+                    workSheet.Cell(row, 4).Style.Font.Bold = true;
+
+                    workSheet.Cell(row, 5).FormulaA1 = $"SUM(E4:E{row - 1})";
+                    workSheet.Cell(row, 6).FormulaA1 = $"SUM(F4:F{row - 1})";
+                    workSheet.Cell(row, 7).FormulaA1 = $"SUM(G4:G{row - 1})";
+                    workSheet.Cell(row, 8).FormulaA1 = $"SUM(H4:H{row - 1})";
+
+                    for (int col = 5; col <= 8; col++)
+                    {
+                        workSheet.Cell(row, col).Style.Font.Bold = true;
+                        workSheet.Cell(row, col).Style.Fill.BackgroundColor = XLColor.LightBlue;
+                        workSheet.Cell(row, col).Style.NumberFormat.Format = "$ #,##0";
+                    }
+
+                    using (var stream = new MemoryStream())
+                    {
+                        workbook.SaveAs(stream);
+                        var content = stream.ToArray();
+
+                        var fileName = $"Reporte_Fletes_{dto.StartTime:yyyyMMdd}_{dto.EndTime:yyyyMMdd}.xlsx";
+
+                        return File(
+                            content,
+                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            fileName
+                        );
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    success = false,
+                    message = $"Error al generar el reporte: {ex.Message}"
+                });
+            }
+        }
+
         [HttpGet]
         [Route("GeMonthsWithData")]
         public async Task<IActionResult> GeMonthsWithData()
