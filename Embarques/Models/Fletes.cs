@@ -17,6 +17,8 @@ public partial class Fletes
 
     public int? CostOfStay { get; set; }
 
+    public DateTime? RegistrationDate { get; set; }
+
     public virtual Destination IdDestinationNavigation { get; set; }
 
     public virtual Suppliers IdSupplierNavigation { get; set; }

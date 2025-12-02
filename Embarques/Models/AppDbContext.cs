@@ -44,6 +44,9 @@ public partial class AppDbContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("createdAt");
             entity.Property(e => e.HighwayExpenseCost).HasColumnName("highwayExpenseCost");
+            entity.Property(e => e.RegistrationDate)
+                .HasColumnType("datetime")
+                .HasColumnName("registrationDate");
 
             entity.HasOne(d => d.IdDestinationNavigation).WithMany(p => p.Fletes)
                 .HasForeignKey(d => d.IdDestination)

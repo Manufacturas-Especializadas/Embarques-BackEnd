@@ -44,7 +44,9 @@ namespace Embarques.Controllers
                 IdDestination = dto.IdDestination,
                 IdSupplier = dto.IdSupplier,
                 HighwayExpenseCost = isProveedorSinCosto ? 0 : dto.HighwayExpenseCost,
-                CostOfStay = isProveedorSinCosto ? 0 : dto.CostOfStay
+                CostOfStay = isProveedorSinCosto ? 0 : dto.CostOfStay,
+                RegistrationDate = dto.RegistrationDate,
+               
             };
 
             _context.Fletes.Add(newFlete);
@@ -139,7 +141,7 @@ namespace Embarques.Controllers
                                        (flete.CostOfStay ?? 0);
                         workSheet.Cell(row, 7).Value = totalCost;
 
-                        workSheet.Cell(row, 8).Value = flete.CreatedAt?.ToString("dd/MM/yyyy");
+                        workSheet.Cell(row, 8).Value = flete.RegistrationDate?.ToString("dd/MM/yyyy") ?? "N/A";
 
                         row++;
                     }
@@ -228,9 +230,10 @@ namespace Embarques.Controllers
                         Destination = f.IdDestinationNavigation.DestinationName,
                         f.HighwayExpenseCost,
                         f.CostOfStay,
+                        f.RegistrationDate,
                         IndividualCost = f.IdDestinationNavigation.Cost,
                         IdSupplier = f.IdSupplier,
-                        IdDestination = f.IdDestination
+                        IdDestination = f.IdDestination                        
                     })
                     .FirstOrDefaultAsync();
 
@@ -263,6 +266,7 @@ namespace Embarques.Controllers
             existingFlete.IdSupplier = dto.IdSupplier;
             existingFlete.HighwayExpenseCost = isProveedorSinCosto ? 0 : dto.HighwayExpenseCost;
             existingFlete.CostOfStay = isProveedorSinCosto ? 0 : dto.CostOfStay;
+            existingFlete.RegistrationDate = dto.RegistrationDate;
 
             await _context.SaveChangesAsync();
 

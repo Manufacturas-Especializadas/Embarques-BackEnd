@@ -9,5 +9,7 @@
         public int? HighwayExpenseCost { get; set; }
 
         public int? CostOfStay { get; set; }
+
+        public DateTime? RegistrationDate { get; set; }
     }
 }

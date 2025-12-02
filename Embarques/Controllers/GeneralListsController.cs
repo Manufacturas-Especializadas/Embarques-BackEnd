@@ -31,6 +31,7 @@ namespace Embarques.Controllers
                                 Destination = f.IdDestinationNavigation.DestinationName,
                                 f.HighwayExpenseCost,
                                 f.CostOfStay,
+                                RegistrationDate = f.RegistrationDate!.Value.ToString("dd/MM/yyyy"),
                                 IndividualCost = f.IdDestinationNavigation.Cost,
                                 Date = f.CreatedAt.Value.ToString("dd/MM/yyyy")
                             })
