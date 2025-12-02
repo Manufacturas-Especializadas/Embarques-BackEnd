@@ -51,6 +51,7 @@ namespace Embarques.Controllers
         {
             var suppliers = await _context.Suppliers
                                 .AsNoTracking()
+                                .OrderBy(s => s.SupplierName)
                                 .ToListAsync();
 
             if( suppliers == null )
@@ -67,6 +68,7 @@ namespace Embarques.Controllers
         {
             var destination = await _context.Destination
                                     .AsNoTracking()
+                                    .OrderBy(d => d.DestinationName)
                                     .ToListAsync();
 
             if( destination == null )
