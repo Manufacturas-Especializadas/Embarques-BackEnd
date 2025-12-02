@@ -46,7 +46,7 @@ namespace Embarques.Controllers
                 HighwayExpenseCost = isProveedorSinCosto ? 0 : dto.HighwayExpenseCost,
                 CostOfStay = isProveedorSinCosto ? 0 : dto.CostOfStay,
                 RegistrationDate = dto.RegistrationDate,
-               
+                TripNumber = dto.TripNumber,
             };
 
             _context.Fletes.Add(newFlete);
@@ -102,7 +102,7 @@ namespace Embarques.Controllers
                     workSheet.Cell(1, 1).Style.Font.FontSize = 14;
                     workSheet.Range(1, 1, 1, 8).Merge();
 
-                    var headers = new string[] { "Proveedor", "Semana", "Destino", "Costo proveedor", "Gastos autopista", "Gasto estadía", "Costo total", "Fecha" };
+                    var headers = new string[] { "Proveedor", "Semana", "Destino", "Número de viaje" ,"Costo proveedor", "Gastos autopista", "Gasto estadía", "Costo total", "Fecha" };
 
                     for (int i = 0; i < headers.Length; i++)
                     {
@@ -131,22 +131,23 @@ namespace Embarques.Controllers
                         workSheet.Cell(row, 2).Value = $"{startWeek:dd MMM}.-{endWeek:dd MMM}";
 
                         workSheet.Cell(row, 3).Value = flete.IdDestinationNavigation?.DestinationName ?? "N/A";
-                        workSheet.Cell(row, 4).Value = flete.IdDestinationNavigation?.Cost ?? 0;
-                        workSheet.Cell(row, 5).Value = flete.HighwayExpenseCost ?? 0;
+                        workSheet.Cell(row, 4).Value = flete.TripNumber ?? 0;
+                        workSheet.Cell(row, 5).Value = flete.IdDestinationNavigation?.Cost ?? 0;
 
-                        workSheet.Cell(row, 6).Value = flete.CostOfStay ?? 0;
+                        workSheet.Cell(row, 6).Value = flete.HighwayExpenseCost ?? 0;
+
+                        workSheet.Cell(row, 7).Value = flete.CostOfStay ?? 0;
 
                         var totalCost = (flete.IdDestinationNavigation?.Cost ?? 0) +
                                        (flete.HighwayExpenseCost ?? 0) +
                                        (flete.CostOfStay ?? 0);
-                        workSheet.Cell(row, 7).Value = totalCost;
+                        workSheet.Cell(row, 8).Value = totalCost;
 
-                        workSheet.Cell(row, 8).Value = flete.RegistrationDate?.ToString("dd/MM/yyyy") ?? "N/A";
+                        workSheet.Cell(row, 9).Value = flete.RegistrationDate?.ToString("dd/MM/yyyy") ?? "N/A";
 
                         row++;
                     }
 
-                    workSheet.Column(4).Style.NumberFormat.Format = "$ #,##0";
                     workSheet.Column(5).Style.NumberFormat.Format = "$ #,##0";
                     workSheet.Column(6).Style.NumberFormat.Format = "$ #,##0";
                     workSheet.Column(7).Style.NumberFormat.Format = "$ #,##0";
@@ -231,6 +232,7 @@ namespace Embarques.Controllers
                         f.HighwayExpenseCost,
                         f.CostOfStay,
                         f.RegistrationDate,
+                        f.TripNumber,
                         IndividualCost = f.IdDestinationNavigation.Cost,
                         IdSupplier = f.IdSupplier,
                         IdDestination = f.IdDestination                        
@@ -267,6 +269,7 @@ namespace Embarques.Controllers
             existingFlete.HighwayExpenseCost = isProveedorSinCosto ? 0 : dto.HighwayExpenseCost;
             existingFlete.CostOfStay = isProveedorSinCosto ? 0 : dto.CostOfStay;
             existingFlete.RegistrationDate = dto.RegistrationDate;
+            existingFlete.TripNumber = dto.TripNumber;
 
             await _context.SaveChangesAsync();
 
