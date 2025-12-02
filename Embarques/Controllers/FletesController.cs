@@ -77,8 +77,8 @@ namespace Embarques.Controllers
                 var fletes = await _context.Fletes
                                 .Include(f => f.IdSupplierNavigation)
                                 .Include(f => f.IdDestinationNavigation)
-                                .Where(f => f.CreatedAt.Value.Year == dto.Year && f.CreatedAt.Value.Month == dto.Month)
-                                .OrderBy(f => f.CreatedAt)
+                                .Where(f => f.RegistrationDate!.Value.Year == dto.Year && f.RegistrationDate!.Value.Month == dto.Month)
+                                .OrderBy(f => f.RegistrationDate)
                                 .OrderByDescending(f => f.Id)
                                 .AsNoTracking()
                                 .ToListAsync();
@@ -116,7 +116,7 @@ namespace Embarques.Controllers
                     {
                         workSheet.Cell(row, 1).Value = flete.IdSupplierNavigation?.SupplierName ?? "N/A";
 
-                        var date = flete.CreatedAt.Value;
+                        var date = flete.RegistrationDate!.Value;
                         var firtsMonth = new DateTime(date.Year, date.Month, 1);
                         var diff = (date - firtsMonth).Days;
                         var week = (diff / 7) + 1;
