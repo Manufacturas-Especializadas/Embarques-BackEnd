@@ -186,11 +186,11 @@ namespace Embarques.Controllers
             try
             {
                 var monthWithData = await _context.Fletes
-                        .Where(f => f.CreatedAt.HasValue)
+                        .Where(f => f.RegistrationDate.HasValue)
                         .Select(f => new
                         {
-                            Year = f.CreatedAt.Value.Year,
-                            Month = f.CreatedAt.Value.Month,
+                            Year = f.RegistrationDate!.Value.Year,
+                            Month = f.RegistrationDate.Value.Month,
                         })
                         .Distinct()
                         .OrderByDescending(x => x.Year)
