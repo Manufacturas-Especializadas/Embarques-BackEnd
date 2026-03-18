@@ -21,6 +21,8 @@ public partial class Fletes
 
     public int? TripNumber { get; set; }
 
+    public int? SpecialPrice { get; set; }
+
     public virtual Destination IdDestinationNavigation { get; set; }
 
     public virtual Suppliers IdSupplierNavigation { get; set; }

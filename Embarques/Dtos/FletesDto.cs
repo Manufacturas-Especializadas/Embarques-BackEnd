@@ -10,6 +10,8 @@
 
         public int? CostOfStay { get; set; }
 
+        public int? SpecialPrice { get; set; }
+
         public DateTime? RegistrationDate { get; set; }
 
         public int? TripNumber { get; set; }

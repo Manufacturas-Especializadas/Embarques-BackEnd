@@ -49,6 +49,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.RegistrationDate)
                 .HasColumnType("datetime")
                 .HasColumnName("registrationDate");
+            entity.Property(e => e.SpecialPrice).HasColumnName("specialPrice");
             entity.Property(e => e.TripNumber).HasColumnName("tripNumber");
 
             entity.HasOne(d => d.IdDestinationNavigation).WithMany(p => p.Fletes)
