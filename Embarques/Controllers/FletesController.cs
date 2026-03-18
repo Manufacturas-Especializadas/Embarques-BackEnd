@@ -103,7 +103,7 @@ namespace Embarques.Controllers
                     workSheet.Cell(1, 1).Style.Font.FontSize = 14;
                     workSheet.Range(1, 1, 1, 8).Merge();
 
-                    var headers = new string[] { "Proveedor", "Semana", "Destino", "Número de viaje" ,"Costo proveedor", "Gastos autopista", "Gasto estadía", "Costo total", "Fecha" };
+                    var headers = new string[] { "Proveedor", "Semana", "Destino", "Número de viaje", "Costo proveedor", "Gastos autopista", "Gasto estadía", "Precio Especial", "Costo total", "Fecha" };
 
                     for (int i = 0; i < headers.Length; i++)
                     {
@@ -134,24 +134,26 @@ namespace Embarques.Controllers
                         workSheet.Cell(row, 3).Value = flete.IdDestinationNavigation?.DestinationName ?? "N/A";
                         workSheet.Cell(row, 4).Value = flete.TripNumber ?? 0;
                         workSheet.Cell(row, 5).Value = flete.IdDestinationNavigation?.Cost ?? 0;
-
                         workSheet.Cell(row, 6).Value = flete.HighwayExpenseCost ?? 0;
-
                         workSheet.Cell(row, 7).Value = flete.CostOfStay ?? 0;
+
+                        workSheet.Cell(row, 8).Value = flete.SpecialPrice ?? 0;
 
                         var totalCost = (flete.IdDestinationNavigation?.Cost ?? 0) +
                                        (flete.HighwayExpenseCost ?? 0) +
-                                       (flete.CostOfStay ?? 0);
-                        workSheet.Cell(row, 8).Value = totalCost;
+                                       (flete.CostOfStay ?? 0) +
+                                       (flete.SpecialPrice ?? 0);
 
-                        workSheet.Cell(row, 9).Value = flete.RegistrationDate?.ToString("dd/MM/yyyy") ?? "N/A";
+                        workSheet.Cell(row, 9).Value = totalCost;
+                        workSheet.Cell(row, 10).Value = flete.RegistrationDate?.ToString("dd/MM/yyyy") ?? "N/A";
 
                         row++;
                     }
 
-                    workSheet.Column(5).Style.NumberFormat.Format = "$ #,##0";
-                    workSheet.Column(6).Style.NumberFormat.Format = "$ #,##0";
-                    workSheet.Column(7).Style.NumberFormat.Format = "$ #,##0";
+                    for (int col = 5; col <= 9; col++)
+                    {
+                        workSheet.Column(col).Style.NumberFormat.Format = "$ #,##0";
+                    }
 
                     workSheet.Columns().AdjustToContents();
 
@@ -224,7 +226,7 @@ namespace Embarques.Controllers
                     workSheet.Cell(1, 1).Style.Font.FontSize = 14;
                     workSheet.Range(1, 1, 1, 9).Merge();
 
-                    var headers = new string[] { "Proveedor", "Semana", "Destino", "Número de viaje", "Costo proveedor", "Gastos autopista", "Gasto estadía", "Costo total", "Fecha" };
+                    var headers = new string[] { "Proveedor", "Semana", "Destino", "Número de viaje", "Costo proveedor", "Gastos autopista", "Gasto estadía", "Precio Especial", "Costo total", "Fecha" };
 
                     for (int i = 0; i < headers.Length; i++)
                     {
@@ -265,20 +267,22 @@ namespace Embarques.Controllers
                         workSheet.Cell(row, 6).Value = flete.HighwayExpenseCost ?? 0;
                         workSheet.Cell(row, 7).Value = flete.CostOfStay ?? 0;
 
+                        workSheet.Cell(row, 8).Value = flete.SpecialPrice ?? 0;
+
                         var totalCost = (flete.IdDestinationNavigation?.Cost ?? 0) +
                                        (flete.HighwayExpenseCost ?? 0) +
-                                       (flete.CostOfStay ?? 0);
-                        workSheet.Cell(row, 8).Value = totalCost;
+                                       (flete.CostOfStay ?? 0) +
+                                       (flete.SpecialPrice ?? 0);
 
-                        workSheet.Cell(row, 9).Value = flete.RegistrationDate?.ToString("dd/MM/yyyy") ?? "N/A";
-
+                        workSheet.Cell(row, 9).Value = totalCost;
+                        workSheet.Cell(row, 10).Value = flete.RegistrationDate?.ToString("dd/MM/yyyy") ?? "N/A";
                         row++;
                     }
 
-                    workSheet.Column(5).Style.NumberFormat.Format = "$ #,##0";
-                    workSheet.Column(6).Style.NumberFormat.Format = "$ #,##0";
-                    workSheet.Column(7).Style.NumberFormat.Format = "$ #,##0";
-                    workSheet.Column(8).Style.NumberFormat.Format = "$ #,##0";
+                    for (int col = 5; col <= 9; col++)
+                    {
+                        workSheet.Column(col).Style.NumberFormat.Format = "$ #,##0";
+                    }
 
                     workSheet.Columns().AdjustToContents();
 
@@ -289,6 +293,7 @@ namespace Embarques.Controllers
                     workSheet.Cell(row, 6).FormulaA1 = $"SUM(F4:F{row - 1})";
                     workSheet.Cell(row, 7).FormulaA1 = $"SUM(G4:G{row - 1})";
                     workSheet.Cell(row, 8).FormulaA1 = $"SUM(H4:H{row - 1})";
+                    workSheet.Cell(row, 9).FormulaA1 = $"SUM(I4:I{row - 1})";
 
                     for (int col = 5; col <= 8; col++)
                     {
