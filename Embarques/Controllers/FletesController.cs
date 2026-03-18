@@ -375,6 +375,7 @@ namespace Embarques.Controllers
                         f.HighwayExpenseCost,
                         f.CostOfStay,
                         f.RegistrationDate,
+                        f.SpecialPrice,
                         f.TripNumber,
                         IndividualCost = f.IdDestinationNavigation.Cost,
                         IdSupplier = f.IdSupplier,
