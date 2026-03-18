@@ -45,6 +45,7 @@ namespace Embarques.Controllers
                 IdSupplier = dto.IdSupplier,
                 HighwayExpenseCost = isProveedorSinCosto ? 0 : dto.HighwayExpenseCost,
                 CostOfStay = isProveedorSinCosto ? 0 : dto.CostOfStay,
+                SpecialPrice = dto.SpecialPrice,
                 RegistrationDate = dto.RegistrationDate,
                 TripNumber = dto.TripNumber,
             };
@@ -412,6 +413,7 @@ namespace Embarques.Controllers
             existingFlete.CostOfStay = isProveedorSinCosto ? 0 : dto.CostOfStay;
             existingFlete.RegistrationDate = dto.RegistrationDate;
             existingFlete.TripNumber = dto.TripNumber;
+            existingFlete.SpecialPrice = dto.SpecialPrice;
 
             await _context.SaveChangesAsync();
 
